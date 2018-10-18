@@ -17,20 +17,24 @@ import argparse
 import time
 from HTSeq import FastaReader
 
-ref_seq = FastaReader("/NGENEBIO/workflow-dependencies/hg19.fa").__iter__().next()
+#ref_seq = FastaReader("/NGENEBIO/workflow-dependencies/hg19.fa").__iter__().next()
 BASES = ['A', 'G', 'C', 'T']
 TWOBASES = [ ''.join(combo) for combo in itertools.permutations(BASES, 2)]
 THREEBASES = [ ''.join(combo) for combo in itertools.permutations(BASES, 3)]
 
 def __main__():
     parser = argparse.ArgumentParser(description='Run make artifical variants(SNVs/InDels)', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('input_transcript',help='transcript list(ex, brca1.txt)')
-    parser.add_argument('chrom',help='chromosome number(ex, 17)')
-    parser.add_argument('output_vcf',help='output vcf file with artifical variants(ex, brca1_artifical.vcf)')
+    parser.add_argument('input_transcript',help='Transcript file(ex, brca1.txt)')
+    parser.add_argument('chrom',help='Chromosome number(ex, 17)')
+    parser.add_argument('output_vcf',help='Output vcf file (ex, brca1_artifical.vcf)')
+    parser.add_argument('ref', help='Spliting FASTA file by chromosome', type=str)
+    parser.add_argument('--vartype', help='Type of variant', choices=['SNV','INS','DEL'], type=str, default='SNV')
     args = parser.parse_args()
-    run_artifical(args.input_transcript,args.chrom,args.output_vcf)
+    print(args.vartype)
+    
+    run_artifical(args.input_transcript, args.chrom, args.output_vcf, args.vartype, args.ref)
 
-def run_artifical(input_transcript,chrom,output_vcf):
+def run_artifical(input_transcript, chrom, output_vcf, vartype, ref):
 
     raw_df=pd.read_csv(input_transcript,sep="\t")
 
@@ -77,7 +81,7 @@ def run_artifical(input_transcript,chrom,output_vcf):
     for interval in collapsed_interval_list:
         pos, stop = interval
         while(pos < stop):
-            var_dict = get_variants(chrom, pos)
+            var_dict = get_variants(chrom, pos, vartype, ref)
             variant_df = variant_df.append(var_dict)
             pos += 1
              
@@ -91,7 +95,7 @@ def run_artifical(input_transcript,chrom,output_vcf):
 ##reference=GrCh37
 ##contig=<ID=chr17,length=81195210>
 ##contig=<ID=chr13,length=115169878>
-    """
+"""
     
     vcf_header = vcf_header.format(datetime.datetime.utcnow().strftime("%Y%m%d"))
     '\n'.join([vcf_header, ('\t'.join(variant_df.columns)), '\t'.join(col_names)])
@@ -121,12 +125,18 @@ def collapse_intervals(intervals):
     yield cur_start, cur_stop
 
 
-def get_variants(chr, pos):
+def get_variants(chr, pos,vartype, fasta_chr_file):
     variant_list = []
+    #fasta_chr_file="/NGENEBIO/workflow-dependencies/seqseek/homo_sapiens_GRCh37/chr%s.fa"%(chr)
+    ref_seq = FastaReader(fasta_chr_file).__iter__().next()
     ref = ref_seq[pos-1:pos+3].seq.upper()
-    variant_list.extend(get_snps(chr, pos, ref))
-    #variant_list.extend(get_insertions(chr, pos, ref))
-    #variant_list.extend(get_deletions(chr, pos, ref))
+
+    if vartype=='SNV':
+       variant_list.extend(get_snps(chr, pos, ref))
+    if vartype=='DEL':
+       variant_list.extend(get_insertions(chr, pos, ref))
+    if vartype=='INS':
+       variant_list.extend(get_deletions(chr, pos, ref))
     return variant_list
 
 def get_snps(chr, pos, ref):
