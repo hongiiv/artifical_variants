@@ -17,7 +17,6 @@ import argparse
 import time
 from HTSeq import FastaReader
 
-#ref_seq = FastaReader("/NGENEBIO/workflow-dependencies/hg19.fa").__iter__().next()
 BASES = ['A', 'G', 'C', 'T']
 TWOBASES = [ ''.join(combo) for combo in itertools.permutations(BASES, 2)]
 THREEBASES = [ ''.join(combo) for combo in itertools.permutations(BASES, 3)]
@@ -58,7 +57,6 @@ def run_artifical(input_transcript, chrom, output_vcf, vartype, ref):
 
     interval_list=[]
     [interval_list.extend(x) for x in expanded_tx_exon_dict.values()]
-    #print(interval_list)
 
     sorted_by_start=sorted(interval_list,key=lambda x: x[0])
 
@@ -67,11 +65,6 @@ def run_artifical(input_transcript, chrom, output_vcf, vartype, ref):
     print("After collapsing we have: " + str(len(collapsed_interval_list)) + " intervals")
     print("\nOur new interval set:\n")
     print(collapsed_interval_list)
-
-    #BASES = ['A', 'G', 'C', 'T']
-    #TWOBASES = [ ''.join(combo) for combo in itertools.permutations(BASES, 2)]
-    #THREEBASES = [ ''.join(combo) for combo in itertools.permutations(BASES, 3)]
-    #ref_seq = FastaReader("/NGENEBIO/workflow-dependencies/hg19.fa").__iter__().next()
 
     col_names= ['#CHROM', 'POS', 'ID', 'REF', 'ALT', 'QUAL', 'FILTER','INFO']
     variant_df = pd.DataFrame(columns=col_names)
@@ -99,8 +92,6 @@ def run_artifical(input_transcript, chrom, output_vcf, vartype, ref):
     
     vcf_header = vcf_header.format(datetime.datetime.utcnow().strftime("%Y%m%d"))
     '\n'.join([vcf_header, ('\t'.join(variant_df.columns)), '\t'.join(col_names)])
-    
-    #output_file = "brca1_artifical_variant.vcf"
     
     try:
         os.remove(output_vcf)
