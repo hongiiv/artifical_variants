@@ -5,7 +5,7 @@ Make artifical variants(SNVs/InDels))
 #### Prerequisites
 
 * Split FASTA into seperate files by chromsome (ex, chr1.fa)
-* Python library
+* Python library (requirements.txt)
  * pandas
  * numpy
  * HTSeq
