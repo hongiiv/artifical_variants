@@ -16,7 +16,7 @@ Make artifical variants(SNVs/InDels))
 
 #### Run
 
-BRCA1 
+BRCA1 all missense mutations and ±100 bp intron. All BRCA1 transcripts are collapse intervals.
 
 `$ python artifical_variants.py brca1.txt 17 brca1_artifical.vcf /NGENEBIO/workflow-dependencies/seqseek/homo_sapiens_GRCh37/chr17.fa`
 
