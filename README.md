@@ -2,6 +2,20 @@
 
 Make artifical variants(SNVs/InDels))
 
+#### Prerequisites
+
+* Split FASTA into seperate files by chromsome (ex, chr1.fa)
+* Python library
+ * pandas
+ * numpy
+ * HTSeq
+
+#### Install
+
+`git clone https://github.com/hongiiv/artifical_variants.git`
+
+#### Run
+
 BRCA1 
 
 `$ python artifical_variants.py brca1.txt 17 brca1_artifical.vcf /NGENEBIO/workflow-dependencies/seqseek/homo_sapiens_GRCh37/chr17.fa`
