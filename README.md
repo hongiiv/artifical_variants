@@ -1,5 +1,7 @@
 # Artifical Variants
 
+[![Build Status](https://travis-ci.org/hongiiv/artifical_variants.svg?branch=master)](https://travis-ci.org/hongiiv/artifical_variants)
+
 Make artifical variants(SNVs/InDels))
 
 #### Prerequisites
