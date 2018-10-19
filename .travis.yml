@@ -5,10 +5,11 @@ python:
 install: 
   - pip install -r requirements.txt
   - pip install codecov
+  - sudo apt-get install python-nose
 
 script:
   - pytest test.py
-  - pytest --cov=./ test.py
+  - nosetests --with-coverage
 
 after_success: 
    - codecov
