@@ -5,6 +5,7 @@
 [![CRAN
 status](http://www.r-pkg.org/badges/version/usethis)](https://cran.r-project.org/package=usethis)
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 Make artifical variants(SNVs/InDels))
 
