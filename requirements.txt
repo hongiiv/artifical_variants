@@ -1,3 +1,6 @@
+HTSeq
+numpy
+pandas
 coverage
 ddt
 mock
