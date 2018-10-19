@@ -4,4 +4,8 @@ python:
 
 install: "pip install -r requirements.txt"
 
-script: pytest test.py
+script:  i
+  - pytest --cov=./ -vv test.py
+  - pytest test.pyt
+
+after_success: codecov
