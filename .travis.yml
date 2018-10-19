@@ -8,7 +8,7 @@ install:
 
 script:
   - pytest test.py
-  - nosetts test.py -v — with-coverage
+  - pytest --cov=./ test.py
 
 after_success: 
    - codecov
