@@ -1,6 +1,9 @@
 # Artifical Variants
 
 [![Build Status](https://travis-ci.org/hongiiv/artifical_variants.svg?branch=master)](https://travis-ci.org/hongiiv/artifical_variants)
+[![CRAN
+status](http://www.r-pkg.org/badges/version/usethis)](https://cran.r-project.org/package=usethis)
+[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
 
 Make artifical variants(SNVs/InDels))
 
