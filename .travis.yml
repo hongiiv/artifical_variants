@@ -8,8 +8,7 @@ install:
   - sudo apt-get install python-nose
 
 script:
-  - pytest test.py
-  - nosetests --with-coverage
+  - nosetests test.py -v --with-coverage
 
 after_success: 
    - codecov
