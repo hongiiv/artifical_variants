@@ -17,3 +17,4 @@ deploy:
   file: dist-file
   on:
     repo: hongiiv/artifical_variants
+
