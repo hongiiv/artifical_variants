@@ -10,11 +10,12 @@ script:
 after_success:
 - codecov
 - bash <(curl -s https://codecov.io/bash)
-deploy:
-  provider: releases
-  api_key:
-    secure: imWt/QKFtgHAcV0nvZUi6SnfEiotOycA2mdbQkZKWf8hiCT3XgR4M1RCl4elL8vPMj3JlFXVhvkZLVxQSKDnBR21ncrdmGuVHzzDN8fUzMlf1LvJ4vcvhY1D4nei1wa/GEyliAVJACqs08Zzwy0OIPogslkbSxdmeZoE5ALKElXaVRYud84g4UFpSkI7BXX2bosNb5u9QvDfg/xMjlFsCD2bsLMbG7ZDBQ72ftJTe+6EiLPr1a61QZlnlQJq6da2DhUB9DzgmO0EVOw6njAn4BAlFVkMEyOfJPy9FaWcMfUpsQoWN6iDIpbHxi/McTEt4DI1jl3k9NDPIj7Wcgym9deVdZ2jAjXGG1scuO1vVDIO1TVSAHsplN6q0VuMaqiGYtn77vWy9xoJ8NY+0IyORue7Xyq0YB3/jWSzvGF2k03/NyylQg9dT7c1uHtka2T3LlXtV9TnB+dEauHekZruFpKlBPfsH5QcDUZLeXAE4A6k1Rn8m/W7o9LPkjhILFKwxehZ34XteZv8B2tjzMcQqhgMTu46MSd9KNV/3bxF3ERmLpvSAsnn+fRrubGojmOBkTkO3LUa2x9jwK2XZaXzqq3B+vd9e64gBF924CeCNTBxAVTVbSD3G7NOs934VIw6zNzrKZjqT159QYK1tgfzObRtU9AkFKZkd2Nri9BZdt0=
-  file: dist-file
-  on:
-    repo: hongiiv/artifical_variants
+notification:
+email:
+recipients:
+- cb.hong@ngenebio.com
+branches:
+only:
+- master
+
 
